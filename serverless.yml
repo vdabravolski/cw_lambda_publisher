@@ -1,0 +1,16 @@
+service: lambda-publisher
+
+provider:
+    name: aws
+    runtime: python3.6
+    region: us-east-2
+    profile: default
+    iamManagedPolicies:
+      - 'arn:aws:iam::aws:policy/CloudWatchFullAccess'
+      - 'arn:aws:iam::aws:policy/AWSLambdaFullAccess'
+
+functions:
+  p70_publisher:
+    handler: p70_publisher.main
+    events:
+      - schedule: cron(0/1 * * * ? *)
